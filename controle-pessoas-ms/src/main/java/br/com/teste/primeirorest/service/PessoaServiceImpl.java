@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import br.com.teste.primeirorest.compartilhado.AnimalDto;
+import br.com.teste.primeirorest.http.AnimaisFeigClient;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +13,16 @@ import org.springframework.stereotype.Service;
 import br.com.teste.primeirorest.compartilhado.PessoaDto;
 import br.com.teste.primeirorest.model.Pessoa;
 import br.com.teste.primeirorest.repository.PessoaRepository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class PessoaServiceImpl implements PessoaService {
     @Autowired
     private PessoaRepository repo;
+
+
+    @Autowired
+    private AnimaisFeigClient animaisMsClient;
 
     @Override
     public PessoaDto criarPessoa(PessoaDto pessoa) {
@@ -38,6 +45,10 @@ public class PessoaServiceImpl implements PessoaService {
        if(pessoa.isPresent()) {
 
             PessoaDto dto = new ModelMapper().map(pessoa.get(), PessoaDto.class);
+
+            List<AnimalDto> animais = animaisMsClient.obterAnimas(id);
+
+            dto.setAnimais(animais);
 
             return Optional.of(dto);
        }

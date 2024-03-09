@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+
+import br.com.teste.primeirorest.view.model.PessoaModeloResponseDetahes;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +34,6 @@ import br.com.teste.primeirorest.view.model.PessoaModeloResponse;
 public class PessoaController {
     @Autowired
     private PessoaService service;
-
 
     
 
@@ -61,12 +62,12 @@ public class PessoaController {
     }
     
     @GetMapping("/api/pessoas/{id}")
-    public ResponseEntity<PessoaModeloResponse> obterPorId(@PathVariable Integer id) {
+    public ResponseEntity<PessoaModeloResponseDetahes> obterPorId(@PathVariable Integer id) {
         Optional<PessoaDto> pessoa = service.obterPorId(id);
 
         if(pessoa.isPresent()) {
             return new ResponseEntity<>(
-                new ModelMapper().map(pessoa.get(), PessoaModeloResponse.class), 
+                new ModelMapper().map(pessoa.get(), PessoaModeloResponseDetahes.class),
                 HttpStatus.OK
             );
         }
