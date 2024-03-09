@@ -32,7 +32,7 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public Optional<PessoaDto> obterPorId(String id) {
+    public Optional<PessoaDto> obterPorId(Integer id) {
        Optional<Pessoa> pessoa = repo.findById(id);
 
        if(pessoa.isPresent()) {
@@ -46,13 +46,13 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public void removerPessoa(String id) {
+    public void removerPessoa(Integer id) {
         repo.deleteById(id);
     }
 
     @Override
-    public PessoaDto atualizarPessoa(String id, PessoaDto pessoa) {
-        pessoa.setId(id);
+    public PessoaDto atualizarPessoa(Integer id, PessoaDto pessoa) {
+
         return salvarPessoa(pessoa);
     }
 

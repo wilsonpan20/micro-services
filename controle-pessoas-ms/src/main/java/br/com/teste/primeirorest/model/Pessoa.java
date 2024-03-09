@@ -1,5 +1,7 @@
 package br.com.teste.primeirorest.model;
 
+import org.springframework.data.relational.core.sql.In;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,16 +12,16 @@ public class Pessoa {
     
     @Id // vai transformar essa coluna em primary key
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Integer id;
     private String nome;
     private String sobrenome;
 
     //#region Getter/ Setter
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -28,18 +28,15 @@ import br.com.teste.primeirorest.view.model.PessoaModeloResponse;
 
 
 @RestController
-@RequestMapping("/api/pessoas")
+//@RequestMapping("/api/pessoas")
 public class PessoaController {
     @Autowired
     private PessoaService service;
 
-    @GetMapping(value="/status")
-    public String statusServico(@Value("${local.server.port}") String porta) {
-        return String.format("Serviço ativo e executando na porta %s", porta);
-    }
+
     
 
-    @PostMapping
+    @PostMapping("/api/pessoas")
     public ResponseEntity<PessoaModeloResponse> criarPessoa(@RequestBody @Valid PessoaModeloRequest pessoa) {
         ModelMapper mapper = new ModelMapper();
         PessoaDto dto = mapper.map(pessoa, PessoaDto.class);
@@ -47,7 +44,7 @@ public class PessoaController {
         return new ResponseEntity<>(mapper.map(dto, PessoaModeloResponse.class), HttpStatus.CREATED);
     }
     
-    @GetMapping
+    @GetMapping("/api/pessoas")
     public ResponseEntity<List<PessoaModeloResponse>> obterTodos() {
         List<PessoaDto> dtos = service.obterTodos();
 
@@ -63,8 +60,8 @@ public class PessoaController {
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
     
-    @GetMapping(value="/{id}")
-    public ResponseEntity<PessoaModeloResponse> obterPorId(@PathVariable String id) {
+    @GetMapping("/api/pessoas/{id}")
+    public ResponseEntity<PessoaModeloResponse> obterPorId(@PathVariable Integer id) {
         Optional<PessoaDto> pessoa = service.obterPorId(id);
 
         if(pessoa.isPresent()) {
@@ -77,8 +74,8 @@ public class PessoaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(value="/{id}")
-    public ResponseEntity<PessoaModeloResponse> atualizarPessoa(@PathVariable String id,
+    @PutMapping("/api/pessoas/{id}")
+    public ResponseEntity<PessoaModeloResponse> atualizarPessoa(@PathVariable Integer id,
         @Valid @RequestBody Pessoa pessoa) {
         ModelMapper mapper = new ModelMapper();
         PessoaDto dto = mapper.map(pessoa, PessoaDto.class);
@@ -87,8 +84,8 @@ public class PessoaController {
         return new ResponseEntity<>(mapper.map(dto, PessoaModeloResponse.class), HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/{id}")
-    public ResponseEntity<Void> removerPessoa(@PathVariable String id) {
+    @DeleteMapping("/api/pessoas/{id}")
+    public ResponseEntity<Void> removerPessoa(@PathVariable Integer id) {
         service.removerPessoa(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     } 
