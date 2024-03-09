@@ -10,6 +10,6 @@ import br.com.teste.animaisms.model.Animal;
 @Repository
 public interface AnimalRepositorio extends JpaRepository<Animal, Integer> {
 
-	List<Animal> findByDono(String dono);
+	List<Animal> findByDono(Integer dono);
     
 }

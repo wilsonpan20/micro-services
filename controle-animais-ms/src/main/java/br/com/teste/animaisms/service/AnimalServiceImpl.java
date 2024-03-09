@@ -72,6 +72,7 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public AnimalDto atualizarAnimal(Integer id, AnimalDto animal) {
         animal.setId(id);
+        animal.getDono();
         return salvarAnimal(animal);
     }
 

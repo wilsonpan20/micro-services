@@ -63,7 +63,7 @@ public class AnimalController {
     }
 
     @GetMapping(value="/{dono}/lista")
-    public ResponseEntity<List<AnimalModeloResponse>> obterPorDono(@PathVariable String dono) {
+    public ResponseEntity<List<AnimalModeloResponse>> obterPorDono(@PathVariable Integer dono) {
         List<AnimalDto> dtos = service.obterPorDono(dono);
 
         if(dtos.isEmpty()){
