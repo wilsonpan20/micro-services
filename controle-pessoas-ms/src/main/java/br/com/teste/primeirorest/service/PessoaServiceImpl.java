@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import br.com.teste.primeirorest.compartilhado.PessoaDto;
 import br.com.teste.primeirorest.model.Pessoa;
 import br.com.teste.primeirorest.repository.PessoaRepository;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 @Service
 public class PessoaServiceImpl implements PessoaService {

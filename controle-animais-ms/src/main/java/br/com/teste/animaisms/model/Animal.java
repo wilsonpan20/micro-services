@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
 public class Animal {
     @Id // vai transformar essa coluna em primary key
     @GeneratedValue(strategy = GenerationType.AUTO)
